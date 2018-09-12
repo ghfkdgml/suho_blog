@@ -13,11 +13,16 @@ class Article(models.Model):
             choices=CATEGORY_CHOICES,
             default=DEVELOPMENT,)
 
+    def __str__(self):
+        return self.title
+
 class Comment(models.Model):
     article=models.ForeignKey(Article,on_delete=models.CASCADE)
     username=models.CharField(max_length=20)
     content=models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.article, self.username
+
 class HashTag(models.Model):
     name=models.CharField(max_length=20)
-
