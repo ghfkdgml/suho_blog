@@ -1,0 +1,14 @@
+<div class="col-sm-3">
+  <div>Category</div>
+  <ul style="padding:10px;">
+         {% for alias,category in category_list %}
+   <p><a style="color:white;" href="/?category={{ alias }}">{{ category }}</a></p>
+   {% endfor %}
+        </ul>
+
+  <div>HashTag
+          {% for x in hashtag_list%}
+    <p>#{{ x }}</p>
+          {% endfor %}
+  </div>
+</div>

@@ -4,23 +4,21 @@
 <div class='container'>
   <div class="jumbotron text-white rounded bg-dark">
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         {% for article in article_list %}
         <div class="col-sm-8">
-          <h1 class="display-4 font-italic">{{article.title}}</h1>
+		<h1 class="display-4 font-italic"><a href="/{{ article.id }}" style="color:white;">{{article.title}}</a></h1>
         </div>
         <div class="col-sm-6">
           <p class="lead my-3">{{article.content}}</p>
         </div>
         {% endfor %}
       </div>
-      <div class="col-sm-4">
-        <p>#test</p>
-        <p>#test2</p>
-        <p>#test3</p>
-      </div>
+      {% include "sidebar.html" %}
+
     </div>
   </div>
 </div>
+
 
 {% endblock %}
