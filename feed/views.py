@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Article,Comment,HashTag
+from django.http import HttpResponseRedirect
 
 def index(request):
 
@@ -24,8 +25,38 @@ def index(request):
     return render(request,"index.html",ctx)
 
 def detail(request,article_id):
+    # if request.method=="GET":
     article=Article.objects.get(id=article_id)
+    comment_list=article.article_comments.all()
     ctx={
-        "article":article
+        "article":article,
+        # "comment_list":comment_list,
     }
+    if request.method=="GET":
+        pass
+    elif request.method=="POST":
+        if request.POST.get("del"):
+            return HttpResponseRedirect("/{}/".format(article_id))
+        else:
+            username=request.POST.get("username")
+            content=request.POST.get("content")
+            Comment.objects.create(
+                article=article,
+                username=username,
+                content=content
+            )
+        print (request.POST)
+        return HttpResponseRedirect("/{}/".format(article_id))
+    print (request)        # print (username,content)
     return render(request,"detail.html",ctx)
+
+def del_comment(request):
+    username=request.GET['username']
+    content=request.GET['content']
+    id=request.GET['id']
+    article_id=request.GET['article_id']
+    print(article_id)
+    p=Comment.objects.filter(username=username,content=content,id=id)
+    p.delete()
+    # return HttpResponseRedirect("/{}/".format(request.GET.get['article_id']))
+    return HttpResponseRedirect("/{}/".format(article_id))

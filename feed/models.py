@@ -7,6 +7,7 @@ class Article(models.Model):
             (DEVELOPMENT,"development"),
             (PERSONAL,"personal"),
             )
+    id=models.AutoField(primary_key=True)
     title=models.CharField(max_length=20)
     content=models.TextField()
     category=models.CharField(max_length=2,
@@ -17,15 +18,19 @@ class Article(models.Model):
         return self.title
 
 class Comment(models.Model):
-    article=models.ForeignKey(Article,on_delete=models.CASCADE)
+    article=models.ForeignKey(
+        Article,
+        related_name="article_comments",
+        on_delete=models.CASCADE)
     username=models.CharField(max_length=20)
     content=models.CharField(max_length=200)
+    id=models.AutoField(primary_key=True)
 
     def __str__(self):
-        return self.article, self.username
+        return self.username
 
 class HashTag(models.Model):
     name=models.CharField(max_length=20)
-    
+
     def __str__(self):
         return self.name

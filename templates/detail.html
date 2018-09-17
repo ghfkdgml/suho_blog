@@ -8,12 +8,32 @@
         <p class="display-4">"{{article.title}}"의 상세내용:</p>
       </div>
 
-        <div class="col-sm-6">
-          <p class="lead my-3">{{article.content}}</p>
-        </div>
-
+      <div class="col-sm-9">
+        <p class="lead my-3">{{article.content}}</p>
       </div>
-      <div class="col-sm-4">
+      {% include "sidebar.html" %}
+
+
+    </div>
+      <div class="col-sm-6">
+        <div>
+          {% for comment in article.article_comments.all %}
+          <script>
+            function click_del(){
+              location.href='/DeleteComment?username={{ comment.username }}&content={{ comment.content }}&id={{ comment.id }}&article_id={{ article.id }}';
+            }
+          </script>
+           <p>->{{ comment.username}}:{{comment.content}}  <button type= "button" class="btn btn-light" onclick="click_del()">삭제X</button></p>
+          {% endfor %}
+        </div>
+        <div>
+          <form method="post" action="">
+            {% csrf_token %}
+            <input name="username" autocomplete="off" placeholder="아이디" />
+            <input name="content" autocomplete="off" placeholder="댓글내용"/>
+            <button type="submit">추가</button>
+          </form>
+        </div>
 
       </div>
     </div>
