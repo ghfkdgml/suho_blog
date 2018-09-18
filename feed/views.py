@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Article,Comment,HashTag
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 def index(request):
 
@@ -45,9 +46,9 @@ def detail(request,article_id):
                 username=username,
                 content=content
             )
-        print (request.POST)
+        messages.info(request,'댓글 추가 완료!')
         return HttpResponseRedirect("/{}/".format(article_id))
-    print (request)        # print (username,content)
+    # print (request)        # print (username,content)
     return render(request,"detail.html",ctx)
 
 def del_comment(request):
@@ -59,4 +60,11 @@ def del_comment(request):
     p=Comment.objects.filter(username=username,content=content,id=id)
     p.delete()
     # return HttpResponseRedirect("/{}/".format(request.GET.get['article_id']))
+    # messages.info(request,'댓글이 삭제되었습니다!')
+    messages.info(request,'댓글 삭제 완료!')
     return HttpResponseRedirect("/{}/".format(article_id))
+
+# def lotto(request):
+#     lotto_list
+#     ctx={}
+#     return render(request,"lotto.html",ctx)

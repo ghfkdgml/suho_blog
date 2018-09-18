@@ -1,19 +1,23 @@
 {% extends "base.html" %}
 {% block body %}
 {% include "narbar.html" %}
+<script>
+  // {% if messages %}
+  //   {% for msg in messages %}
+  //     alert('{{ msg }}');
+  //   {% endfor %}
+  // {% endif %}
+</script>
 <div class='container'>
   <div class="jumbotron text-white rounded bg-dark">
     <div class="row">
       <div class="col-sm-10">
         <p class="display-4">"{{article.title}}"의 상세내용:</p>
       </div>
-
       <div class="col-sm-9">
         <p class="lead my-3">{{article.content}}</p>
       </div>
       {% include "sidebar.html" %}
-
-
     </div>
       <div class="col-sm-6">
         <div>
@@ -21,23 +25,39 @@
           <script>
             function click_del(){
               location.href='/DeleteComment?username={{ comment.username }}&content={{ comment.content }}&id={{ comment.id }}&article_id={{ article.id }}';
+              // {% if messages %}
+              //   {% for msg in messages %}
+              //     alert('{{ msg }}');
+              //   {% endfor %}
+              // {% endif %}
             }
+
+            // function click_add(){
+            //   {% if messages %}
+            //     alert('{{ messages }}');
+            //   {% endif %}
+            // }
           </script>
            <p>->{{ comment.username}}:{{comment.content}}  <button type= "button" class="btn btn-light" onclick="click_del()">삭제X</button></p>
           {% endfor %}
+          <script>
+            {% if messages %}
+              {% for msg in messages %}
+                alert('{{ msg }}');
+              {% endfor %}
+            {% endif %}
+          </script>
         </div>
         <div>
           <form method="post" action="">
             {% csrf_token %}
             <input name="username" autocomplete="off" placeholder="아이디" />
             <input name="content" autocomplete="off" placeholder="댓글내용"/>
-            <button type="submit">추가</button>
+            <button type="submit" onclick="click_add()">추가</button>
           </form>
         </div>
 
       </div>
-    </div>
   </div>
 </div>
-
 {% endblock %}
