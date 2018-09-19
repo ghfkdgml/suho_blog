@@ -1,4 +1,4 @@
-<div class="col-sm-3">
+<div class="col-sm-3" style="padding:30px;">
   <div>Category</div>
   <ul style="padding:10px;">
          {% for alias,category in category_list %}
@@ -7,8 +7,9 @@
         </ul>
 
   <div>HashTag
-          {% for x in hashtag_list%}
-    <p>#{{ x }}</p>
-          {% endfor %}
+    <ul style="padding:10px;">
+            {% for x in hashtag_list%}
+      <p>#{{ x }}</p>
+            {% endfor %}
   </div>
 </div>

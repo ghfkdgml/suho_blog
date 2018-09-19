@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Article,Comment,HashTag
+from .models import Article,Comment,HashTag,Lotto
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
@@ -29,8 +29,15 @@ def detail(request,article_id):
     # if request.method=="GET":
     article=Article.objects.get(id=article_id)
     comment_list=article.article_comments.all()
+    article_ext=Article.objects.all()
+    hashtag_list=HashTag.objects.all()
+    category_list=set([
+        (article.category,article.get_category_display()) for article in article_ext
+        ])
     ctx={
         "article":article,
+        "category_list":category_list,
+        "hashtag_list":hashtag_list,
         # "comment_list":comment_list,
     }
     if request.method=="GET":
@@ -64,7 +71,17 @@ def del_comment(request):
     messages.info(request,'댓글 삭제 완료!')
     return HttpResponseRedirect("/{}/".format(article_id))
 
-# def lotto(request):
-#     lotto_list
-#     ctx={}
-#     return render(request,"lotto.html",ctx)
+def lotto(request):
+    #lotto_list
+    article_ext=Article.objects.all()
+    hashtag_list=HashTag.objects.all()
+    lotto_list=Lotto.objects.all()
+    category_list=set([
+        (article.category,article.get_category_display()) for article in article_ext
+        ])
+    ctx={
+        "category_list":category_list,
+        "hashtag_list":hashtag_list,
+        "lotto_list":lotto_list,
+    }
+    return render(request,"lotto.html",ctx)

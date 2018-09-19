@@ -35,6 +35,10 @@ class HashTag(models.Model):
     def __str__(self):
         return self.name
 
-# class Lotto(models.Model):
-#     day=models.CharField()
-#     lotto=models.CharField()
+class Lotto(models.Model):
+    id=models.AutoField(primary_key=True)
+    day=models.TextField()
+    lotto=models.TextField()
+
+    def __str__(self):
+        return self.day
