@@ -3,9 +3,11 @@ from django.db import models
 class Article(models.Model):
     DEVELOPMENT="dv"
     PERSONAL="ps"
+    ETC="etc"
     CATEGORY_CHOICES=(
             (DEVELOPMENT,"development"),
             (PERSONAL,"personal"),
+            (ETC,"etc")
             )
     id=models.AutoField(primary_key=True)
     title=models.CharField(max_length=20)

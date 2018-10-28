@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block body %}
+<script>
+  {% if messages %}
+    {% for msg in messages %}
+      alert('{{ msg }}');
+    {% endfor %}
+  {% endif %}
+</script>
+      <div class="col-sm-9">
+        <!-- <div class="col-sm-9"> -->
+          <h1 class="display-4 font-italic">New blog making</h1>
+          <form method="post" action="" name='newblog'>
+            {% csrf_token %}
+            <div>
+              <label class="required" for="content" style="width:130px;">블로그제목</label>
+              <input name="title" style="margin:50px;" autocomplete="off"/>
+            </div>
+            <div>
+              <label class="required" for="content" style="width:130px;">블로그내용</label>
+              <input name="content" id="content" style="width:400px;height:500px;margin:50px;" autocomplete="off"/>
+            </div>
+            <div>
+                <label class="required" for="id_category" style="width:130px;">Category</label>
+                <select id="id_category" name="category" style="margin:50px;" required="">
+                  <option value="dv" selected="selected">development</option>
+                  <option value="ps">personal</option>
+                </select>
+            </div>
+            <button type="submit">생성</button>
+          </form>
+        <!-- </div> -->
+      </div>
+      {% include "sidebar.html" %}
+{% endblock %}

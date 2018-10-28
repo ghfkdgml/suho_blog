@@ -1,14 +1,28 @@
 {% extends "base.html" %}
 {% block body %}
-{% include "narbar.html" %}
-
+<script>
+  function click_del(a){
+    var b=confirm("정말로 삭제하시겠습니까?")
+    if(b==true){
+      location.href="/dellotto?id="+a;
+    }
+    // alert("/dellotto?id="+a);
+  }
+</script>
       <div class="col-sm-9">
         <div class="col-sm-8">
           <h1 class="display-4 font-italic">Lotto Page</h1>
+          <form method="post" action="" name='lott'>
+            {% csrf_token %}
+            <!-- <input name="lotto_day" autocomplete="off" placeholder="날짜" /> -->
+            <button type="submit">생성</button>
+          </form>
         </div>
         {% for lotto in lotto_list %}
-        <div class="col-sm-6">
-          <p class="lead my-3"><a href="#">{{ lotto.id }} . {{ lotto.day }} 번호</a></p>
+
+        <div class="col-sm-7">
+
+          <p class="lead my-3"> - {{ lotto.day }} 번호:{{ lotto.lotto }} <button type= "button" name ="{{ lotto.id }}" value=" {{ lotto.id }} " onclick="click_del(this.value)">del</button></p>
         </div>
         {% endfor %}
       </div>

@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
-{% include "narbar.html" %}
+
 
       <div class="col-sm-9">
         {% for article in article_list %}
         <div class="col-sm-8">
 		      <h1 class="display-4 font-italic"><a href="/{{ article.id }}" style="color:white;">{{article.title}}</a></h1>
         </div>
-        <div class="col-sm-6">
-          <p class="lead my-3">{{article.content}}</p>
+        <div class="col-sm-8">
+          <h3 style="margin-top:40px;padding-bottom:40px;margin-bottom:40px;border-bottom:1px solid black;">{{article.content}}</h3>
         </div>
         {% endfor %}
       </div>

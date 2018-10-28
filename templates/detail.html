@@ -1,12 +1,28 @@
 {% extends "base.html" %}
 {% block body %}
-{% include "narbar.html" %}
 <script>
   // {% if messages %}
   //   {% for msg in messages %}
   //     alert('{{ msg }}');
   //   {% endfor %}
   // {% endif %}
+</script>
+<script>
+  function click_del(a){
+    var b=document.getElementsByName(a);
+    location.href="/DeleteComment?article_id={{ article.id }}&id="+b[0].value;
+    // {% if messages %}
+    //   {% for msg in messages %}
+    //     alert('{{ msg }}');
+    //   {% endfor %}
+    // {% endif %}
+  }
+
+  // function click_add(){
+  //   {% if messages %}
+  //     alert('{{ messages }}');
+  //   {% endif %}
+  // }
 </script>
 
       <div class="col-sm-9">
@@ -16,26 +32,10 @@
       <div class="col-sm-8">
         <p class="lead my-3">{{article.content}}</p>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-8">
         <div>
           {% for comment in article.article_comments.all %}
-          <script>
-            function click_del(){
-              location.href='/DeleteComment?username={{ comment.username }}&content={{ comment.content }}&id={{ comment.id }}&article_id={{ article.id }}';
-              // {% if messages %}
-              //   {% for msg in messages %}
-              //     alert('{{ msg }}');
-              //   {% endfor %}
-              // {% endif %}
-            }
-
-            // function click_add(){
-            //   {% if messages %}
-            //     alert('{{ messages }}');
-            //   {% endif %}
-            // }
-          </script>
-           <p>->{{ comment.username}}:{{comment.content}}  <button type= "button" class="btn btn-light" onclick="click_del()">삭제X</button></p>
+           <p>->{{ comment.username}}:{{comment.content}}  <button type= "button" class="btn btn-light" name="{{ comment.id }}" value="{{ comment.id }}" onclick="click_del(this.value)">삭제X</button></p>
           {% endfor %}
           <script>
             {% if messages %}
@@ -48,12 +48,12 @@
         <div>
           <form method="post" action="">
             {% csrf_token %}
-            <input name="username" autocomplete="off" placeholder="아이디" />
+            <input name="username" autocomplete="off" placeholder="아이디" style="width:130px;"/>
             <input name="content" autocomplete="off" placeholder="댓글내용"/>
             <button type="submit" onclick="click_add()">추가</button>
           </form>
         </div>
        </div>
       </div>
-    {% include "sidebar.html" %}    
+    {% include "sidebar.html" %}
 {% endblock %}

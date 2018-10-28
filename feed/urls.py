@@ -7,4 +7,6 @@ urlpatterns=[
         url(r'^(?P<article_id>[0-9]+)/$',views.detail,name='index'),
         url(r'^DeleteComment/$',views.del_comment,name='index'),
         url(r'^lotto/$',views.lotto,name='index'),
+        url(r'^dellotto/$',views.delete_Lotto,name='index'),
+        url(r'^blog/$',views.newblog,name='index'),
         ]

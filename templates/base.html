@@ -31,18 +31,33 @@
 </head>
 
 <body>
-  <div class="col-md-4 p-lg-3 mx-auto my-4">
-    <h1 class="display-4 font-weight-normal">수호네 블로그</h1>
-  </div>
-  <div class='container'>
-    <div class="jumbotron text-white rounded bg-dark">
-      <div class="row">
+  <!-- <div class='container' style="margin-bottom:1px;">
+    <h1 class="center-block display-4 font-weight-normal rounded" style="font-family:'돋움';text-align:center;background:linear-gradient( to right, yellow, red )">수호네 블로그</h1>
+  </div> -->
+  {% include "narbar.html" %}
+  <header class="masthead" style="background-image: url('/static/home-bg.jpg');height:400px;">
+      <div class="overlay"></div>
+      <div class="container" style="position:relative;top:20%;text-align:center;">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1 style="font-size:80px">Suho Blog</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  <div style="background-color:#d0ecfa">
+    <div class='container'>
+      <div class="jumbotron text-white rounded" style="background-color:#d0ecfa">
+        <div class="row" >
 
-  {% block body %}{% endblock %}
+    {% block body %}{% endblock %}
 
+        </div>
       </div>
     </div>
-  </div>
+    <div>
 
   <!-- <script src='{% static "js/lib/bootstrap.min.js" %}'></script> -->
 
