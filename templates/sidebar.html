@@ -1,8 +1,8 @@
 <div class="col-sm-3" style="padding:30px;border-left: 2px solid grey">
-  <div>Category</div>
+  <div style="font-weight:bold">Category</div>
   <ul style="padding:10px;">
          {% for alias,category in category_list %}
-   <p><a style="color:white;" href="/?category={{ alias }}">{{ category }}</a></p>
+   <p><a style="color:black;" href="/?category={{ alias }}">{{ category }}</a></p>
    {% endfor %}
    {% for v,num in category_num.item %}
      <li>{{num}}</li>
@@ -10,11 +10,11 @@
   </ul>
 
 
-  <div>HashTag
+  <div style="font-weight:bold">HashTag</div>
     <ul style="padding:10px;">
             {% for x in hashtag_list%}
       <p>#{{ x }}</p>
             {% endfor %}
       <p>{{hash_num}}</p>
-  </div>
+      </ul>
 </div>

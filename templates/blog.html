@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block body %}
+<style>
+  div{color:black}
+</style>
 <script>
   {% if messages %}
     {% for msg in messages %}
@@ -13,7 +16,7 @@
           <form method="post" action="" name='newblog'>
             {% csrf_token %}
             <div>
-              <label class="required" for="content" style="width:130px;">블로그제목</label>
+              <label class="required" for="content" style="width:130px;color:black;">블로그제목</label>
               <input name="title" style="margin:50px;" autocomplete="off"/>
             </div>
             <div>
