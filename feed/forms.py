@@ -29,3 +29,7 @@ class ArticleForm(forms.Form):
         # defaults=DEVELOPMENT,
         initial=CATEGORY_CHOICES[0],
         )
+
+    title.widget.attrs.update({'class': 'form-control'})
+    content.widget.attrs.update({'style': 'height:200px'})
+    # category.widget.attrs.update({'class':"custom-select"})

@@ -21,13 +21,30 @@
             <button type="submit">생성</button>
           </form>
         </div>
-        {% for lotto in lotto_list %}
+        <div class="col-sm-9">
 
-        <div class="col-sm-7">
-
-          <p class="lead my-3"> - {{ lotto.day }} 번호:{{ lotto.lotto }} <button type= "button" name ="{{ lotto.id }}" value=" {{ lotto.id }} " onclick="click_del(this.value)">del</button></p>
+          <!-- <p class="lead my-3"> - {{ lotto.day }} 번호:{{ lotto.lotto }} <button type= "button" name ="{{ lotto.id }}" value=" {{ lotto.id }} " onclick="click_del(this.value)">del</button></p> -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">생성날짜</th>
+                <th scope="col">구매할 날짜</th>
+                <th scope="col">추천 번호</th>
+                <th scope="col">삭제</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for lotto in lotto_list %}
+              <tr>
+                <td>{{lotto.day}}</td>
+                <td>{{lotto_cnt}}</td>
+                <td>{{lotto.lotto}}</td>
+                <td><button type= "button" name ="{{ lotto.id }}" value=" {{ lotto.id }} " onclick="click_del(this.value)">del</button></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
-        {% endfor %}
       </div>
       {% include "sidebar.html" %}
 {% endblock %}

@@ -7,7 +7,7 @@
       <div class="col-sm-9">
         {% for article in article_list %}
         <div class="col-sm-8">
-		      <h1 class="display-4 font-italic"><a href="/{{ article.id }}" style="color:black;">{{article.title}}</a></h1>
+		      <h1 class="display-4 font-italic"><a href="/{{ article.id }}" style="color:black;text-decoration:none">{{article.title}}</a></h1>
           <p>생성시간:{{article.created_at}}</p>
         </div>
         <div class="col-sm-8">

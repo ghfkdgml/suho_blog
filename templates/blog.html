@@ -2,6 +2,15 @@
 {% block body %}
 <style>
   div{color:black}
+  select {
+    width: 200px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 18px;
+    color: #006fff;
+    border: 1px solid #006fff;
+    border-radius: 3px;
+}
 </style>
 <script>
   {% if messages %}
@@ -30,8 +39,12 @@
                   <option value="ps">personal</option>
                 </select>
             </div> -->
-            {{form.as_p}}
-            <button type="submit">생성</button>
+            <!-- <p class="form-control">{{form.title}}</p>
+            <p class="form-control">{{form.content}}</p>
+            <p class="form-control">{{form.category}}</p> -->
+
+              {{form.as_p}}
+            <button type="submit" class="btn btn-light">생성</button>
           </form>
         <!-- </div> -->
       </div>

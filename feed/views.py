@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from random import *
 import time
+import datetime
 from .forms import ArticleForm
 from .tests import getNum
 
@@ -22,7 +23,6 @@ for article in article_ext:
     elif article.category=="etc":
             category_num["etc"]+=1
 
-print(category_list)
 
 def index(request):
 
@@ -88,6 +88,20 @@ def del_comment(request):
     messages.info(request,'댓글 삭제 완료!')
     return HttpResponseRedirect("/{}/".format(article_id))
 
+def checkSaturday():
+    today=datetime.datetime.now()
+    num=today.weekday()
+    if num!=5:
+        if num==6:
+            retDay=today+datetime.timedelta(days=6)
+        else:
+            retDay=today+datetime.timedelta(days=5-num)
+
+    else:
+        retDay=today
+
+    return retDay.date()
+
 def lotto(request):
     #lotto_list
     if request.POST:
@@ -101,10 +115,13 @@ def lotto(request):
     #     return HttpResponseRedirect("/lotto/")
 
     lotto_list=Lotto.objects.all()
+    lotto_cnt=checkSaturday()
+    print(lotto_cnt)
     ctx={
         "category_list":category_list,
         "hashtag_list":hashtag_list,
         "lotto_list":lotto_list,
+        "lotto_cnt":lotto_cnt,
     }
     return render(request,"lotto.html",ctx)
 
@@ -117,6 +134,9 @@ def delete_Lotto(request):
     return HttpResponseRedirect("/lotto/")
 
 def newblog(request):
+    category_list=set([
+        (article.category,article.get_category_display()) for article in article_ext
+        ])
     if request.POST:
         # title=request.POST.get("title")
         # content=request.POST.get("content")
@@ -125,13 +145,22 @@ def newblog(request):
         #     content=content,
         # )
         form=ArticleForm(request.POST,request.FILES)
-        messages.info(request,'블로그 추가 완료!')
-        ctx={
-            "category_list":category_list,
-            "hashtag_list":hashtag_list,
-            "form":form,
-        }
-        return HttpResponseRedirect("/blog/")
+        if form.is_valid():
+            title=request.POST.get('title')
+            content=request.POST.get('content')
+            category=request.POST.get('category')
+            Article.objects.create(
+                title=title,
+                content=content,
+                category=category,
+            )
+            messages.info(request,'블로그 추가 완료!')
+            ctx={
+                "category_list":category_list,
+                "hashtag_list":hashtag_list,
+                "form":form,
+            }
+            return HttpResponseRedirect("/blog/")
     else:
         form=ArticleForm()
 
@@ -156,9 +185,3 @@ def choiceNum():
         for j in range(totalNum.count(num)):
             totalNum.remove(num)
     return sorted(ret)
-
-
-# def lotto_page(request):
-#     day=request.POST.get("day")
-#
-#     messages.info(request,'번호 생성 완료')
