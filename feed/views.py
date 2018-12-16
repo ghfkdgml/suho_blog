@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from random import *
 import time
+from .forms import ArticleForm
+from .tests import getNum
 
 article_ext=Article.objects.all()
 hashtag_list=HashTag.objects.all()
@@ -116,29 +118,35 @@ def delete_Lotto(request):
 
 def newblog(request):
     if request.POST:
-        title=request.POST.get("title")
-        content=request.POST.get("content")
-        Article.objects.create(
-            title=title,
-            content=content,
-        )
+        # title=request.POST.get("title")
+        # content=request.POST.get("content")
+        # Article.objects.create(
+        #     title=title,
+        #     content=content,
+        # )
+        form=ArticleForm(request.POST,request.FILES)
         messages.info(request,'블로그 추가 완료!')
         ctx={
             "category_list":category_list,
             "hashtag_list":hashtag_list,
+            "form":form,
         }
         return HttpResponseRedirect("/blog/")
     else:
+        form=ArticleForm()
+
         ctx={
             "category_list":category_list,
             "hashtag_list":hashtag_list,
+            "form":form,
         }
         return render(request,"blog.html",ctx)
 
 
 def choiceNum():
     totalNum=[]
-    TOTAL={1:[1]*145,2:[2]*132,3:[3]*128,4:[4]*136,5:[5]*127,6:[6]*128,7:[7]*131,8:[8]*131,9:[9]*101,10:[10]*137,11:[11]*133,12:[12]*137,13:[13]*138,14:[14]*131,15:[15]*128,16:[16]*126,17:[17]*139,18:[18]*128,19:[19]*127,20:[20]*140,21:[21]*130,22:[22]*101,23:[23]*111,24:[24]*131,25:[25]*125,26:[26]*129,27:[27]*148,28:[28]*111,29:[29]*109,30:[30]*120,31:[31]*131,32:[32]*112,33:[33]*136,34:[34]*144,35:[35]*122,36:[36]*126,37:[37]*133,38:[38]*123,39:[39]*128,40:[40]*137,41:[41]*114,42:[42]*120,43:[43]*147,44:[44]*125,45:[45]*128}
+    # TOTAL={1:[1]*145,2:[2]*132,3:[3]*128,4:[4]*136,5:[5]*127,6:[6]*128,7:[7]*131,8:[8]*131,9:[9]*101,10:[10]*137,11:[11]*133,12:[12]*137,13:[13]*138,14:[14]*131,15:[15]*128,16:[16]*126,17:[17]*139,18:[18]*128,19:[19]*127,20:[20]*140,21:[21]*130,22:[22]*101,23:[23]*111,24:[24]*131,25:[25]*125,26:[26]*129,27:[27]*148,28:[28]*111,29:[29]*109,30:[30]*120,31:[31]*131,32:[32]*112,33:[33]*136,34:[34]*144,35:[35]*122,36:[36]*126,37:[37]*133,38:[38]*123,39:[39]*128,40:[40]*137,41:[41]*114,42:[42]*120,43:[43]*147,44:[44]*125,45:[45]*128}
+    TOTAL=getNum()
     for i in range(len(TOTAL)):
         totalNum=totalNum+TOTAL[i+1]
     ret=[]

@@ -12,10 +12,10 @@
 </script>
       <div class="col-sm-9">
         <!-- <div class="col-sm-9"> -->
-          <h1 class="display-4 font-italic">New blog making</h1>
+          <h1 class="display-4 font-italic">Blog 글쓰기!</h1>
           <form method="post" action="" name='newblog'>
             {% csrf_token %}
-            <div>
+            <!-- <div>
               <label class="required" for="content" style="width:130px;color:black;">블로그제목</label>
               <input name="title" style="margin:50px;" autocomplete="off"/>
             </div>
@@ -29,7 +29,8 @@
                   <option value="dv" selected="selected">development</option>
                   <option value="ps">personal</option>
                 </select>
-            </div>
+            </div> -->
+            {{form.as_p}}
             <button type="submit">생성</button>
           </form>
         <!-- </div> -->

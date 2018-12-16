@@ -15,6 +15,7 @@ class Article(models.Model):
     category=models.CharField(max_length=2,
             choices=CATEGORY_CHOICES,
             default=DEVELOPMENT,)
+    created_at=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

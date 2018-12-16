@@ -8,9 +8,10 @@
         {% for article in article_list %}
         <div class="col-sm-8">
 		      <h1 class="display-4 font-italic"><a href="/{{ article.id }}" style="color:black;">{{article.title}}</a></h1>
+          <p>생성시간:{{article.created_at}}</p>
         </div>
         <div class="col-sm-8">
-          <h3 style="margin-top:40px;padding-bottom:40px;margin-bottom:40px;border-bottom:1px solid black;">내용:{{article.content}}</h3>
+          <h3 style="margin-top:40px;padding-bottom:40px;margin-bottom:40px;border-bottom:1px solid grey;">{{article.content}}</h3>
         </div>
         {% endfor %}
       </div>
